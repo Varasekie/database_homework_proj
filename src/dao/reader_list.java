@@ -104,7 +104,7 @@ public class reader_list extends JFrame {
         scroll2.setBounds(860, 200, 200, 120);
         scroll2.setVisible(false);
         cp.add(scroll2);
-        String[][] cellData2 = {{"全部"}, {"2019-11"},{"2019-12"}};
+        String[][] cellData2 = {{"全部"}, {"2019-12"},{"2020-01"}};
         pulicDateTable = new JTable(cellData2, columnNames) {
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -602,8 +602,17 @@ public class reader_list extends JFrame {
                     typeQueryLabel.setVisible(true);
                 }
                 int num = typeQuery.getText().length();//获得种类查找的字符串长度
-                String SQL = SEARCH_BY_TYPE + "'" + typeQuery.getText() + "'";
-                String SQL_ = SEARCH_BY_TYPE + "'" + typeQuery.getText() + "'";
+                String SQL = "";
+
+                if(typeQuery.getText().equals("全部")) {
+                    SQL = "select * from book;";
+
+                }else if(typeQuery.getText().equals("计算机")){
+                    SQL = "select * from book  where book_num = any(select book_num from book_book_category where category_num = " + String.valueOf(typeQuery.getColumns()) + ");";
+                }else{
+                    SQL = "select * from book  where book_num = any(select book_num from book_book_category where category_num = " + String.valueOf(typeQuery.getColumns()+1) + ");";
+                }
+                String SQL_ = "";
                 if (num != 0) {
                     tableModel = SQLOperation(SQL,SQL_);
                     table.setModel(tableModel);
@@ -984,11 +993,14 @@ public class reader_list extends JFrame {
         dbcon = new database();
         database dbcon_;
         dbcon_ = new database();
+
         try {
             ResultSet rs = dbcon.executeQuery(SQL);
             ResultSetMetaData rsmd = rs.getMetaData();
-            ResultSet rs_ = dbcon_.executeQuery(SQL_);
-
+            ResultSet rs_ = dbcon.executeQuery(SQL);
+            if(!SQL_.equals("")) {
+                rs_ = dbcon_.executeQuery(SQL_);
+            }
             for (int i = 1; i <= 3; i++) {
                 tableModel1.addColumn(rsmd.getColumnName(i));
             }
@@ -997,7 +1009,9 @@ public class reader_list extends JFrame {
              * */
             v = new ArrayList<>();
             while (rs.next()) {
-                rs_.next();
+                if(!SQL_.equals("")) {
+                    rs_.next();
+                }
                 book_entity book = new book_entity();
                 book.setbook_name(rs.getString("book_name"));
                 book.setbook_num(rs.getString("book_num"));

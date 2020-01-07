@@ -203,7 +203,6 @@ public class log_manager extends JFrame {
         dbcon = new database();
         try {
             ResultSet rs = dbcon.executeQuery(SQL);
-//            ResultSetMetaData rsmd = rs.getMetaData();
             for(int i=1;i<=4;i++) {
                 tableModel1.addColumn("");
             }
