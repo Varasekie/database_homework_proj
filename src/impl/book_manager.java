@@ -21,18 +21,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class book_manager extends JFrame {
-
-    private static final String REDUCE="create trigger `addbook`" +
-                                        "after update on `book`" +
-                                        "for each row" +
-                                        "begin" +
-                                        "update book" +
-                                        "set amount = ifnull(book.book_no ,0)+1" +
-                                        "where book_num = new.isAdder;" +
-                                        "insert into test (v1) values (new.isAdder);" +
-                                        "end";
-
-
+    
     private static final String REFRESH = "select * from book";
     private static final String REFRESH_ = "select book_book_category.book_num," +
                                 "book_category.category_name from book_book_category " +
