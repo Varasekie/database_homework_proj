@@ -205,7 +205,8 @@ public class admin_login extends JFrame {
                  * */
                 database dbcon;
                 dbcon = new database();
-                String SQL = "select * from administrator where admin_id = '"+admin_id.getText() +"';";
+                String SQL = "select * from administrator where admin_id = '"+
+                        admin_id.getText() +"';";
                 try {
                     ResultSet rs = dbcon.executeQuery(SQL);
 

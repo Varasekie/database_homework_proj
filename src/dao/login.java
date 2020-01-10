@@ -167,7 +167,11 @@ public class login extends JFrame {
                 database dbcon_;
                 dbcon_ = new database();
                 String SQL = "select * from reader where reader_num = '" + userName.getText() + "';";
-                String SQL_ = "select reader_reader_category.reader_num,reader_category.category_name from reader_reader_category left join reader_category on reader_reader_category.category_num = reader_category.category_num where reader_num = '" + userName.getText() + "';";
+                String SQL_ = "select reader_reader_category.reader_num," +
+                        "reader_category.category_name from reader_reader_category " +
+                        "left join reader_category on " +
+                        "reader_reader_category.category_num = reader_category.category_num " +
+                        "where reader_num = '" + userName.getText() + "';";
                 try {
                     ResultSet rs = dbcon.executeQuery(SQL);
                     ResultSet rs_ = dbcon_.executeQuery(SQL_);
@@ -352,7 +356,8 @@ public class login extends JFrame {
                      * */
                     database dbcon;
                     dbcon = new database();
-                    String SQL = "select * from reader where reader_num = '" + userName.getText() + "';";
+                    String SQL = "select * from reader where reader_num = '"
+                            + userName.getText() + "';";
                     try {
                         ResultSet rs = dbcon.executeQuery(SQL);
                         while (rs.next()) {
@@ -450,7 +455,9 @@ public class login extends JFrame {
             public void mouseClicked(MouseEvent e) {
 
                 database database = new database();
-                String SQL = "select * from reader where Email = '" + email.getText() + "' and Phone = '" + phone.getText() + "';";
+                String SQL = "select * from reader where Email = '"
+                        + email.getText() + "' and Phone = '" +
+                        phone.getText() + "';";
                 try {
                     ResultSet rs = database.executeQuery(SQL);
                     while (rs.next()) {

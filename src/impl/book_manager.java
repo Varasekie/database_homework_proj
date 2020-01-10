@@ -22,8 +22,22 @@ import java.util.Date;
 
 public class book_manager extends JFrame {
 
+    private static final String REDUCE="create trigger `addbook`" +
+                                        "after update on `book`" +
+                                        "for each row" +
+                                        "begin" +
+                                        "update book" +
+                                        "set amount = ifnull(book.book_no ,0)+1" +
+                                        "where book_num = new.isAdder;" +
+                                        "insert into test (v1) values (new.isAdder);" +
+                                        "end";
+
+
     private static final String REFRESH = "select * from book";
-    private static final String REFRESH_ = "select book_book_category.book_num,book_category.category_name from book_book_category left join book_category on book_book_category.category_num = book_category.category_num;";
+    private static final String REFRESH_ = "select book_book_category.book_num," +
+                                "book_category.category_name from book_book_category " +
+                                "left join book_category on " +
+                                "book_book_category.category_num = book_category.category_num;";
 
     private table_model tableModel;
     private JTable table;
@@ -300,7 +314,8 @@ public class book_manager extends JFrame {
                     table.getCellEditor().stopCellEditing();
                 }
 
-                String sql = "update book set book_name=?,book_num=?,position=?,writer=?,publish=?,publish_date=?,update_time=? where book_num=?;";
+                String sql = "update book set book_name=?,book_num=?,position=?,writer=?," +
+                        "publish=?,publish_date=?,update_time=? where book_num=?;";
                 String sql_ = "update book_book_category set category_num=? where book_num=?";
 
                 try {

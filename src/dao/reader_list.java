@@ -27,17 +27,25 @@ public class reader_list extends JFrame {
      * SQL语句常量(Mysql数据库)
      * */
     private static final String SWI_OFF = "select * from book";
-    private static final String SWI_OFF_ = "select book_book_category.book_num,book_category.category_name from book_book_category left join book_category on book_book_category.category_num = book_category.category_num";
+    private static final String SWI_OFF_ = "select book_book_category.book_num," +
+                                            "book_category.category_name from book_book_category " +
+                                            "left join book_category on " +
+                                            "book_book_category.category_num = book_category.category_num";
     private static final String SWI_ON = "select * from book where is_borrowed = 'No' ";
     private static final String SWI_ON_ = "select * from book where is_borrowed = 'No' ";
     private static final String SEARCH_BY_KEY_VALUE = "select * from book where book_name like";
     private static final String SEARCH_BY_TYPE = "select * from book where book_category = ";
     private static final String SEARCH_BY_publish = "select * from book where publish = ";
-    private static final String SEARCH_BY_PUBLIC_DATE = "select * from book where publish_date like ";
-    private static final String SEARCH_ALL_NUMBER = "select count(*) '库存量' from book where book_name = ";
-    private static final String SEARCH_BORROW_NUMBER = "select count(*) '借出量' from book where is_borrowed = 'yes' and book_name = ";
-    private static final String SEARCH_LEFT_NUMBER = "select count(*) '剩余量' from book where is_borrowed = 'No' and book_name = ";
-    private static final String BORROWED_BOOK_NUMBER = "select count(*) '借书量' from borrow where reader_num = ";
+    private static final String SEARCH_BY_PUBLIC_DATE = "select * from book " +
+                                                        "where publish_date like ";
+    private static final String SEARCH_ALL_NUMBER = "select count(*) '库存量' from book " +
+                                                    "where book_name = ";
+    private static final String SEARCH_BORROW_NUMBER = "select count(*) '借出量' from book " +
+                                                       "where is_borrowed = 'yes' and book_name = ";
+    private static final String SEARCH_LEFT_NUMBER = "select count(*) '剩余量' from book " +
+                                                     "where is_borrowed = 'No' and book_name = ";
+    private static final String BORROWED_BOOK_NUMBER = "select count(*) '借书量' from borrow " +
+                                                       "where reader_num = ";
 
     private boolean swi_on = false;
     private ArrayList<book_entity> v = new ArrayList<>();
@@ -356,7 +364,8 @@ public class reader_list extends JFrame {
                             database dbcon = new database();
                             database dbcon_ = new database();
                             database dbcon__ = new database();
-                            String sql1 = "update borrow set return_data = '" + dFormat.format(new Date()) + "' where book_num= '" +
+                            String sql1 = "update borrow set return_data = '" + dFormat.format(new Date()) +
+                                    "' where book_num= '" +
                                     str_book_num + "' and reader_num = '" + login.formalReader.getreader_num() + "';";
                             String sql2 = "update book set is_borrowed= 'No' where book_num = '" + str_book_num + "';";
                             String sql3 = "select * from borrow where book_num =" + str_book_num;
@@ -527,24 +536,19 @@ public class reader_list extends JFrame {
             public void mousePressed(MouseEvent e) {
                 search.setIcon(new ImageIcon("images/搜索图标.png"));
                 int num = keyQuery.getText().length();
-                /*
-                 * 让每个字都有效
-                 * */
                 String[] s = new String[num];
-                for (int i = 0; i < num; i++) {//让每个字都有效
-                    s[i] = "'%" + keyQuery.getText().substring(i, i + 1) + "%'";//两边有单引号
+                for (int i = 0; i < num; i++) {
+                    s[i] = "'%" + keyQuery.getText().substring(i, i + 1) + "%'";
                 }
                 StringBuilder SQL = new StringBuilder(SEARCH_BY_KEY_VALUE);
                 StringBuilder SQL_ = new StringBuilder("");
                 for (int i = 0; i < num - 1; i++) {
-                    SQL.append(s[i]).append("or book_name like ");//相当于SQL+= s[i]+"or book_name like ";
-                    //防止出现数组下标越界的情况
+                    SQL.append(s[i]).append("or book_name like ");
                 }
                 try {
                     SQL.append(s[num - 1]);
                     tableModel = SQLOperation(SQL.toString(),SQL_.toString());
                     table.setModel(tableModel);
-                    //db每一次都要美化表格，No则要出错
                     beautifyTable(table);
                 } catch (ArrayIndexOutOfBoundsException ae) {
                     System.out.println("数组下标越界");
@@ -608,7 +612,9 @@ public class reader_list extends JFrame {
                     SQL = "select * from book;";
 
                 }else if(typeQuery.getText().equals("计算机")){
-                    SQL = "select * from book  where book_num = any(select book_num from book_book_category where category_num = " + String.valueOf(typeQuery.getColumns()) + ");";
+                    SQL = "select * from book  where book_num = " +
+                            "any(select book_num from book_book_category " +
+                            "where category_num = " + String.valueOf(typeQuery.getColumns()) + ");";
                 }else{
                     SQL = "select * from book  where book_num = any(select book_num from book_book_category where category_num = " + String.valueOf(typeQuery.getColumns()+1) + ");";
                 }

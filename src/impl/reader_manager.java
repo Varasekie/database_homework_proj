@@ -18,7 +18,10 @@ import java.util.ArrayList;
 
 public class reader_manager extends JFrame {
     private static final String REFRESH = "select * from reader";
-    private static final String REFRESH_ = "select reader_reader_category.reader_num,reader_category.category_name from reader_reader_category left join reader_category on reader_reader_category.category_num = reader_category.category_num;";
+    private static final String REFRESH_ = "select reader_reader_category.reader_num," +
+            "reader_category.category_name from reader_reader_category " +
+            "left join reader_category on " +
+            "reader_reader_category.category_num = reader_category.category_num;";
 
     private table_model tableModel;
     private JTable table;
@@ -87,8 +90,10 @@ public class reader_manager extends JFrame {
                     table.getCellEditor().stopCellEditing();
                 }
 
-                String sql = "update reader set reader_num =?,reader_name=?,gender=?,email=?,phone=?,Note=? where reader_num=?";
-                String sql_ = "update reader_reader_category set category_num=? where reader_num=?";
+                String sql = "update reader set reader_num =?,reader_name=?," +
+                        "gender=?,email=?,phone=?,Note=? where reader_num=?";
+                String sql_ = "update reader_reader_category set " +
+                        "category_num=? where reader_num=?";
                 try {
                     PreparedStatement presta = dbcon.PreparedStatement(sql);
                     PreparedStatement presta_ = dbcon_.PreparedStatement(sql_);

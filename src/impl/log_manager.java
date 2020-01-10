@@ -206,9 +206,6 @@ public class log_manager extends JFrame {
             for(int i=1;i<=4;i++) {
                 tableModel1.addColumn("");
             }
-            /*
-             * 这句话非常重要，不写这句话，那么每次更新，原来的数据都不会消除
-             * */
             ArrayList<borrow_entity> v = new ArrayList<>();
             while(rs.next()){
                 borrow_entity borrow = new borrow_entity();

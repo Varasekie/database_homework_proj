@@ -52,23 +52,24 @@ public class register extends JFrame {
     private int x = 0;
     private int fontHeight;
     private int codeY;
-    char[] codeSequence = { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'm', 'n', 'q', 'r', 's', 't',
-            'u','v','w','x','y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'M', 'N', 'Q', 'R', 'S','T','U','V', 'W',
-            'X', 'Y', 'Z', '2', '3', '4', '5', '6', '7', '8', '9' };
+    char[] codeSequence = { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h',
+            'i', 'j', 'k', 'm', 'n', 'q', 'r', 's', 't', 'u','v','w',
+            'x','y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I',
+            'J', 'K', 'M', 'N', 'Q', 'R', 'S','T','U','V', 'W', 'X', 'Y'
+            , 'Z', '2', '3', '4', '5', '6', '7', '8', '9' };
 
     public register() throws IOException {
         super("注册页");
-        ImageIcon img = new ImageIcon("images/注册界面.png");//这是背景图片
+        ImageIcon img = new ImageIcon("images/注册界面.png");
         this.setSize(img.getIconWidth(), img.getIconHeight());
         this.setLocationRelativeTo(null);
-        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);//退出仅仅销毁当前注册页，不会退出程序
-
-        JLabel imgLabel = new JLabel(img);//将背景图放在标签里。
-        this.getLayeredPane().add(imgLabel, Integer.valueOf(Integer.MIN_VALUE));//背景标签添加
-        imgLabel.setBounds(0, 0, img.getIconWidth(), img.getIconHeight());//设置背景标签的位置
+        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        JLabel imgLabel = new JLabel(img);
+        this.getLayeredPane().add(imgLabel, Integer.valueOf(Integer.MIN_VALUE));
+        imgLabel.setBounds(0, 0, img.getIconWidth(), img.getIconHeight());
         Container cp = this.getContentPane();
         cp.setLayout(null);
-        ((JPanel) cp).setOpaque(false); //注意这里，将内容面板设为透明
+        ((JPanel) cp).setOpaque(false);
 
 
         /*
@@ -192,10 +193,6 @@ public class register extends JFrame {
             g.setColor(new Color(red, green, blue));
             g.drawString(strRand, (i + 1) * x, codeY);
             randomCode.append(strRand);
-
-            /*
-             * 验证码进行赋值
-             * */
             idecodes[0] = new ide_code();
             idecodes[0].setFileName("ideCode/ideCode.png");
             idecodes[0].setResult(randomCode.toString());
@@ -279,7 +276,8 @@ public class register extends JFrame {
                     userIdMesssage1.setVisible(true);
                 } else {
                     database dbcon = new database();
-                    String sql = "select reader_num from reader where reader_num = '" + userId.getText() + "';";
+                    String sql = "select reader_num from reader where reader_num = '"
+                            + userId.getText() + "';";
                     try {
                         ResultSet rs = dbcon.executeQuery(sql);
                         /*防止结果集为空时报错*/
@@ -409,7 +407,8 @@ public class register extends JFrame {
                  * */
                 if (prefix > 3 && middle == 1 && after > 0 && suffix == 1) {
                     database dbcon = new database();
-                    String sql = "select Email from reader where Email = '" + email.getText() + "';";
+                    String sql = "select Email from reader where Email = '"
+                            + email.getText() + "';";
                     try {
                         ResultSet rs = dbcon.executeQuery(sql);
                         if (rs.next()) {
@@ -600,8 +599,11 @@ public class register extends JFrame {
                     database dbcon = new database();
                     database dbcon_ = new database();
                     DateFormat dFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                    String sql = "insert into reader(reader_num,reader_name,reader_pwd,registe_time,gender,email,phone,Note)values(?,?,?,?,?,?,?,?);";
-                    String sql_ = "insert into reader_reader_category(reader_num,category_num)values(?,?);";
+                    String sql = "insert into reader(reader_num," +
+                            "reader_name,reader_pwd,registe_time," +
+                            "gender,email,phone,Note)values(?,?,?,?,?,?,?,?);";
+                    String sql_ = "insert into reader_reader_category" +
+                            "(reader_num,category_num)values(?,?);";
                     PreparedStatement prestate;
                     PreparedStatement prestate_;
                     try {
