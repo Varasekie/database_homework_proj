@@ -1,4 +1,4 @@
-<mxfile host="www.draw.io" modified="2020-01-10T03:37:46.408Z" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36" etag="YJoMZkJwlVdNGcfWHCZm" version="12.5.1" type="github">
+<mxfile host="www.draw.io" modified="2020-01-10T06:23:34.952Z" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36" etag="icxv7dqwM39xTre3aZgm" version="12.5.1" type="github">
   <diagram id="ADWW6KA9A3b437raw59y" name="Page-1">
     <mxGraphModel dx="1830" dy="553" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
@@ -184,10 +184,12 @@
             <mxPoint x="515" y="280" as="targetPoint"/>
           </mxGeometry>
         </mxCell>
-        <mxCell id="2MD7mv1ZxBUKlqD_YmNW-2" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0;exitDx=0;exitDy=0;entryX=0;entryY=1;entryDx=0;entryDy=0;endArrow=none;endFill=0;" edge="1" parent="1" source="2MD7mv1ZxBUKlqD_YmNW-1" target="qk5S9nWQlCDxr0NH0Po0-3">
-          <mxGeometry relative="1" as="geometry"/>
+        <mxCell id="2MD7mv1ZxBUKlqD_YmNW-2" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0;exitDx=0;exitDy=0;entryX=0;entryY=1;entryDx=0;entryDy=0;endArrow=none;endFill=0;" parent="1" target="qk5S9nWQlCDxr0NH0Po0-3" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="373.8379480147978" y="217.20408917919076" as="sourcePoint"/>
+          </mxGeometry>
         </mxCell>
-        <mxCell id="2MD7mv1ZxBUKlqD_YmNW-1" value="书本种类" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="vfbqB5_o6vBD67unYNyd-1" value="书本数量" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="310" y="210" width="75" height="50" as="geometry"/>
         </mxCell>
       </root>
